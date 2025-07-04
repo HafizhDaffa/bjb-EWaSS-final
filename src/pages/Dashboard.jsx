@@ -14,7 +14,7 @@ export default function Dashboard() {
   const [totalProvinsi, setTotalProvinsi] = useState(null);
   const [fetchHistory, setFetchHistory] = useState([]);
 
-  const BASE_URL = 'https://d299-210-210-144-170.ngrok-free.app';
+  const BASE_URL = 'https://eac9-210-210-144-170.ngrok-free.app';
 
 useEffect(() => {
   async function fetchRac() {

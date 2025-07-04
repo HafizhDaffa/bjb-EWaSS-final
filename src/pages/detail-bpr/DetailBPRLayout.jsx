@@ -13,7 +13,7 @@ export default function DetailBPRLayout({ children }) {
     const token = localStorage.getItem('access_token');
     const fetchData = async () => {
       try {
-        const response = await axios.get(`https://d299-210-210-144-170.ngrok-free.app/bpr_lainnya/get_detail/${params.id}`, {
+        const response = await axios.get(`https://eac9-210-210-144-170.ngrok-free.app/bpr_lainnya/get_detail/${params.id}`, {
           headers: {
           Authorization: `Bearer ${token}`,
           Accept: 'application/json',

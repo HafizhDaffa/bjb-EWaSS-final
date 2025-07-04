@@ -12,7 +12,7 @@ export default function PotensiPlafonPage() {
       try {
         const token = localStorage.getItem("access_token");
         const response = await axios.get(
-          `https://d299-210-210-144-170.ngrok-free.app/bpr_lainnya/plafon/${params.id}`,
+          `https://eac9-210-210-144-170.ngrok-free.app/bpr_lainnya/plafon/${params.id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

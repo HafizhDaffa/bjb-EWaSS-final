@@ -2,173 +2,12 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const mockData = [
-  {
-    id: 1,
-    sandi: '600001',
-    nama: 'PT BPR Jawa Timur',
-    aset: '2.904.036.421.000',
-    labaDesember: '18.710.493.000',
-    labaJuni: '11.132.072.000',
-    npl: '3,39%',
-    kpmm: '40,61%',
-    roa: '0,87%',
-    kap: '5,05%',
-    bopo: '90,42%',
-    result: 'Sehat',
-    resultColor: 'text-green-600',
-    indicatorColor: 'bg-green-600'
-  },
-  {
-    id: 2,
-    sandi: '600002',
-    nama: 'PT BPR Shinta Putra Pengasih',
-    aset: '14.257.999.000',
-    labaDesember: '1.871.182.000',
-    labaJuni: '710.372.000',
-    npl: '30,91%',
-    kpmm: '28,04%',
-    roa: '-7,47%',
-    kap: '26,22%',
-    bopo: '141,89%',
-    result: 'Sehat',
-    resultColor: 'text-green-600',
-    indicatorColor: 'bg-green-600'
-  },
-  {
-    id: 3,
-    sandi: '600003',
-    nama: 'PT BPR Nusantara Bona Pasogit 24',
-    aset: '14.257.999.000',
-    labaDesember: '1.871.182.000',
-    labaJuni: '710.372.000',
-    npl: '30,91%',
-    kpmm: '28,04%',
-    roa: '-7,47%',
-    kap: '26,22%',
-    bopo: '141,89%',
-    result: 'Tidak Sehat',
-    resultColor: 'text-red-600',
-    indicatorColor: 'bg-red-600'
-  },
-  {
-    id: 4,
-    sandi: '600004',
-    nama: 'PT. BPR Citra Ladon Rahardja',
-    aset: '14.257.999.000',
-    labaDesember: '1.477.350.000',
-    labaJuni: '710.372.000',
-    npl: '30,91%',
-    kpmm: '28,04%',
-    roa: '1,64%',
-    kap: '26,22%',
-    bopo: '141,89%',
-    result: 'Tidak Sehat',
-    resultColor: 'text-red-600',
-    indicatorColor: 'bg-red-600'
-  },
-  {
-    id: 5,
-    sandi: '600005',
-    nama: 'PT BPR Shinta Putra Pengasih',
-    aset: '14.257.999.000',
-    labaDesember: '1.871.182.000',
-    labaJuni: '710.372.000',
-    npl: '30,91%',
-    kpmm: '28,04%',
-    roa: '-7,47%',
-    kap: '26,22%',
-    bopo: '141,89%',
-    result: 'Sehat',
-    resultColor: 'text-green-600',
-    indicatorColor: 'bg-green-600'
-  },
-  {
-    id: 6,
-    sandi: '600006',
-    nama: 'PT BPR Nusantara Bona Pasogit 24',
-    aset: '14.257.999.000',
-    labaDesember: '1.871.182.000',
-    labaJuni: '710.372.000',
-    npl: '30,91%',
-    kpmm: '28,04%',
-    roa: '-7,47%',
-    kap: '26,22%',
-    bopo: '141,89%',
-    result: 'Tidak Sehat',
-    resultColor: 'text-red-600',
-    indicatorColor: 'bg-red-600'
-  },
-  {
-    id: 7,
-    sandi: '600007',
-    nama: 'PT. BPR Citra Ladon Rahardja',
-    aset: '14.257.999.000',
-    labaDesember: '1.477.350.000',
-    labaJuni: '710.372.000',
-    npl: '30,91%',
-    kpmm: '28,04%',
-    roa: '1,64%',
-    kap: '26,22%',
-    bopo: '141,89%',
-    result: 'Sehat',
-    resultColor: 'text-green-600',
-    indicatorColor: 'bg-green-600'
-  },
-  {
-    id: 8,
-    sandi: '600008',
-    nama: 'PT BPR Shinta Putra Pengasih',
-    aset: '14.257.999.000',
-    labaDesember: '1.871.182.000',
-    labaJuni: '710.372.000',
-    npl: '30,91%',
-    kpmm: '28,04%',
-    roa: '-7,47%',
-    kap: '26,22%',
-    bopo: '141,89%',
-    result: 'Tidak Sehat',
-    resultColor: 'text-red-600',
-    indicatorColor: 'bg-red-600'
-  },
-  {
-    id: 9,
-    sandi: '600009',
-    nama: 'PT BPR Nusantara Bona Pasogit 24',
-    aset: '14.257.999.000',
-    labaDesember: '1.871.182.000',
-    labaJuni: '710.372.000',
-    npl: '30,91%',
-    kpmm: '28,04%',
-    roa: '-7,47%',
-    kap: '26,22%',
-    bopo: '141,89%',
-    result: 'Tidak Sehat',
-    resultColor: 'text-red-600',
-    indicatorColor: 'bg-red-600'
-  },
-  {
-    id: 10,
-    sandi: '600010',
-    nama: 'PT. BPR Citra Ladon Rahardja',
-    aset: '14.257.999.000',
-    labaDesember: '1.477.350.000',
-    labaJuni: '710.372.000',
-    npl: '30,91%',
-    kpmm: '28,04%',
-    roa: '1,64%',
-    kap: '26,22%',
-    bopo: '141,89%',
-    result: 'Sehat',
-    resultColor: 'text-green-600',
-    indicatorColor: 'bg-green-600'
-  }
-];
+
 
 export default function ProfilingBPRPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
-  const BASE_URL = 'https://d299-210-210-144-170.ngrok-free.app';
+  const BASE_URL = 'https://eac9-210-210-144-170.ngrok-free.app';
   const [provinsiList, setProvinsiList] = useState([]);
   const [kotaKabupatenList, setKotaKabupatenList] = useState([]);
 
@@ -253,6 +92,7 @@ export default function ProfilingBPRPage() {
       if (kota) params.append('nama_kota', kota);
       if (onlyHealthy) params.append('status', 'SEHAT');
       if (onlyUnHealthy) params.append('status', 'TIDAK SEHAT');
+      if (searchTerm) params.append('nama_bpr', searchTerm);
 
       params.append('page', page);
       params.append('per_page', 10);
@@ -382,14 +222,14 @@ export default function ProfilingBPRPage() {
       
       <section className="bg-[#F3F5F9] rounded-lg p-4">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-3">
-          <div className="flex items-center gap-2 text-[13px] text-[#1E1E2D]">
-            {/* <span>Show</span>
+          {/* <div className="flex items-center gap-2 text-[13px] text-[#1E1E2D]">
+            <span>Show</span>
             <select className="bg-[#1E3A70] text-white rounded-md py-1 px-3 text-[13px] font-semibold">
               <option>10</option>
             </select>
-            <span>entries</span> */}
+            <span>entries</span>
 
-          </div>
+          </div> */}
           <div className="w-full md:w-72">
             <input 
               className="w-full border border-[#D1D5DB] rounded-md py-2 px-3 text-[13px] text-[#1E1E2D]" 
@@ -397,6 +237,12 @@ export default function ProfilingBPRPage() {
               type="search"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  e.preventDefault();
+                  fetchBprData(1);
+                }
+              }}
             />
           </div>
         </div>
