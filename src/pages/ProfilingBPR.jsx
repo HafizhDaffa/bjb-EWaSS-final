@@ -227,16 +227,16 @@ export default function ProfilingBPRPage() {
                 <th className="border-b border-[#E6E8EC] text-left py-2 px-3 w-[30px]">No</th>
                 <th className="border-b border-[#E6E8EC] text-left py-2 px-3 w-[70px]">Sandi</th>
                 <th className="border-b border-[#E6E8EC] text-left py-2 px-3 min-w-[140px]">Nama BPR</th>
-                <th className="border-b border-[#E6E8EC] text-right py-2 px-3 w-[110px] cursor-pointer select-none">
+                <th className="border-b border-[#E6E8EC] text-center py-2 px-3 w-[110px] cursor-pointer select-none">
                   Aset
                   {/* <i className="fas fa-sort-up ml-1 text-[#9CA3AF]"></i> */}
                 </th>
                 <th className="border-b border-[#E6E8EC] text-right py-2 px-3 w-[90px] cursor-pointer select-none">
-                  Laba Desember 21
+                  Laba Tahun Sebelumnya
                   {/* <i className="fas fa-sort-up ml-1 text-[#9CA3AF]"></i> */}
                 </th>
                 <th className="border-b border-[#E6E8EC] text-right py-2 px-3 w-[100px] cursor-pointer select-none">
-                  Laba Juni 2022
+                  Laba Saat Ini
                   {/* <i className="fas fa-sort-up ml-1 text-[#9CA3AF]"></i> */}
                 </th>
                 <th className="border-b border-[#E6E8EC] text-right py-2 px-3 w-[70px] cursor-pointer select-none">

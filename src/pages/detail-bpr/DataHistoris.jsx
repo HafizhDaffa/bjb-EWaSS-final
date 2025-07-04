@@ -197,21 +197,21 @@ export default function DataHistorisPage() {
           <div className="flex-1 pr-3">
             <div className="font-semibold text-xs leading-snug text-gray-900">
               {kpmmTerbaru !== null && roaTerbaru !== null && racData &&
-                kpmmTerbaru <= racData.kpmm && roaTerbaru <= racData.roa
+                (kpmmTerbaru <= racData.kpmm || roaTerbaru <= racData.roa)
                 ? 'Modal dan profitabilitas melemah'
                 : 'Modal dan profitabilitas yang kuat'
               }
             </div>
             <div className="text-xs text-gray-500 mt-1 leading-tight">
               {kpmmTerbaru !== null && roaTerbaru !== null && racData &&
-                kpmmTerbaru <= racData.kpmm && roaTerbaru <= racData.roa
+                (kpmmTerbaru <= racData.kpmm || roaTerbaru <= racData.roa)
                 ? 'KPMM dan ROA tidak sehat'
                 : 'KPMM dan ROA baik'
               }
             </div>
           </div>
           {kpmmTerbaru !== null && roaTerbaru !== null && racData &&
-            kpmmTerbaru <= racData.kpmm && roaTerbaru <= racData.roa ? (
+            (kpmmTerbaru <= racData.kpmm || roaTerbaru <= racData.roa) ? (
             <div className="bg-red-200 rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0">
               <i className="fas fa-times text-red-600 text-sm"></i>
             </div>
@@ -339,7 +339,7 @@ export default function DataHistorisPage() {
             </ResponsiveContainer>
           )}
         </div>
-        <p className="text-sm text-gray-600 mt-2">*Dalam jutaan Rp.</p>
+        <p className="text-sm text-gray-600 mt-2">*Dalam Milyar Rp.</p>
       </div>
 
 

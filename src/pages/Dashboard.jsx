@@ -308,10 +308,7 @@ useEffect(() => {
                         month: 'long',
                         year: 'numeric',
                       })}{' '}
-                      {new Date(item.start).toLocaleTimeString('id-ID', {
-                        hour: '2-digit',
-                        minute: '2-digit',
-                      })}
+                      {item.start.slice(17, 22)} WIB
                     </td>
                     <td className="py-3 pr-4">
                       {item.end ? (
@@ -322,10 +319,7 @@ useEffect(() => {
                             month: 'long',
                             year: 'numeric',
                           })}{' '}
-                          {new Date(item.end).toLocaleTimeString('id-ID', {
-                            hour: '2-digit',
-                            minute: '2-digit',
-                          })}
+                          {item.end.slice(17, 22)} WIB
                         </>
                       ) : (
                         '-'
