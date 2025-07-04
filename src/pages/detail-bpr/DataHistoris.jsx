@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import api from '../../helper/api';
 import {
   LineChart,
   Line,
@@ -21,7 +21,6 @@ export default function DataHistorisPage() {
   const [labaData, setLabaData] = useState([]);
   const [rasioData, setRasioData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const BASE_URL = 'https://eac9-210-210-144-170.ngrok-free.app';
 
   const [racData, setRacData] = useState(null);
   const [nplTerbaru, setNplTerbaru] = useState(null);
@@ -59,18 +58,7 @@ export default function DataHistorisPage() {
   useEffect(() => {
     const fetchAset = async () => {
       try {
-        const token = localStorage.getItem('access_token');
-        const response = await axios.get(
-          `${BASE_URL}/bpr_scrapping/get_bpr_asset/${id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              Accept: 'application/json',
-              'ngrok-skip-browser-warning': '6024'
-            },
-            withCredentials: false
-          }
-        );
+        const response = await api.get(`/bpr_scrapping/get_bpr_asset/${id}`);
 
         const formatted = response.data.data.map((item) => ({
           name: `${item.bulan} ${item.tahun}`,
@@ -95,18 +83,7 @@ export default function DataHistorisPage() {
     };
     const fetchLaba = async () => {
     try {
-      const token = localStorage.getItem('access_token');
-      const response = await axios.get(
-        `${BASE_URL}/bpr_scrapping/get_bpr_laba/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            Accept: 'application/json',
-            'ngrok-skip-browser-warning': '6024'
-          },
-          withCredentials: false
-        }
-      );
+      const response = await api.get(`/bpr_scrapping/get_bpr_laba/${id}`);
 
       const monthOrder = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
 
@@ -129,18 +106,7 @@ export default function DataHistorisPage() {
     };
     const fetchRasioData = async () => {
     try {
-      const token = localStorage.getItem('access_token');
-      const response = await axios.get(
-        `${BASE_URL}/bpr_scrapping/get_bpr_rac_lain/${id}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            Accept: 'application/json',
-            'ngrok-skip-browser-warning': '6024'
-          },
-          withCredentials: false
-        }
-      );
+      const response = await api.get(`/bpr_scrapping/get_bpr_rac_lain/${id}`);
 
       const monthOrder = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
 
@@ -174,25 +140,15 @@ export default function DataHistorisPage() {
       console.error('Gagal memuat data rasio:', error);
     }
     };
-    async function fetchRac() {
+    const fetchRac = async () => {
       try {
-        const token = localStorage.getItem('access_token');
-        const response = await axios.get(`${BASE_URL}/rac/getData`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            Accept: 'application/json',
-            'ngrok-skip-browser-warning': '6024'
-          },
-          withCredentials: false,
-        });
-
-        setRacData(response.data); 
+        const response = await api.get('/rac/getData');
+        setRacData(response.data);
         console.log(response.data);
-        
       } catch (error) {
         console.error('Gagal fetch RAC:', error);
       }
-    }
+    };
 
     fetchRac();
     fetchRasioData();

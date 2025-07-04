@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import api from '../helper/api';
 
 
 
 export default function ProfilingBPRPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
-  const BASE_URL = 'https://eac9-210-210-144-170.ngrok-free.app';
   const [provinsiList, setProvinsiList] = useState([]);
   const [kotaKabupatenList, setKotaKabupatenList] = useState([]);
 
@@ -27,15 +26,7 @@ export default function ProfilingBPRPage() {
   useEffect(() => {
     async function fetchProvinsi() {
       try {
-        const token = localStorage.getItem('access_token');
-        const response = await axios.get(`${BASE_URL}/bpr_lainnya/get_all_provinsi`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            Accept: 'application/json',
-            'ngrok-skip-browser-warning': '6024'
-          },
-          withCredentials: false,
-        });
+        const response = await api.get('/bpr_lainnya/get_all_provinsi');
         if (response.data && response.data.provinsi) {
           setProvinsiList(response.data.provinsi);
         }
@@ -48,33 +39,24 @@ export default function ProfilingBPRPage() {
   }, []);
 
   useEffect(() => {
-  async function fetchKotaByProvinsi() {
-    if (!provinsi) {
-      setKotaKabupatenList([]);
-      return;
-    }
-
-    try {
-      const token = localStorage.getItem('access_token');
-      const response = await axios.get(`${BASE_URL}/bpr_lainnya/get_all_kota?provinsi=${encodeURIComponent(provinsi)}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          Accept: 'application/json',
-          'ngrok-skip-browser-warning': '6024'
-        },
-        withCredentials: false,
-      });
-
-      if (response.data && response.data.kota_kabupaten) {
-        setKotaKabupatenList(response.data.kota_kabupaten);
+    async function fetchKotaByProvinsi() {
+      if (!provinsi) {
+        setKotaKabupatenList([]);
+        return;
       }
-    } catch (error) {
-      console.error("Gagal memuat data kota/kabupaten:", error);
-    }
-  }
 
-  fetchKotaByProvinsi();
-}, [provinsi]);
+      try {
+        const response = await api.get(`/bpr_lainnya/get_all_kota?provinsi=${encodeURIComponent(provinsi)}`);
+        if (response.data && response.data.kota_kabupaten) {
+          setKotaKabupatenList(response.data.kota_kabupaten);
+        }
+      } catch (error) {
+        console.error("Gagal memuat data kota/kabupaten:", error);
+      }
+    }
+
+    fetchKotaByProvinsi();
+  }, [provinsi]);
 
 //   useEffect(() => {
 //   fetchBprData(1); // ambil ulang data saat checkbox berubah
@@ -83,7 +65,6 @@ export default function ProfilingBPRPage() {
 
   const fetchBprData = async (page = 1) => {
     try {
-      const token = localStorage.getItem('access_token');
       const params = new URLSearchParams();
 
       if (year) params.append('tahun', year);
@@ -97,14 +78,7 @@ export default function ProfilingBPRPage() {
       params.append('page', page);
       params.append('per_page', 10);
 
-      const response = await axios.get(`${BASE_URL}/bpr_scrapping/get_all_bpr?${params.toString()}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          Accept: 'application/json',
-          'ngrok-skip-browser-warning': '6024'
-        },
-        withCredentials: false,
-      });
+      const response = await api.get(`/bpr_scrapping/get_all_bpr?${params.toString()}`);
 
       if (response.data && response.data.data) {
         setBprData(response.data.data);
@@ -115,7 +89,6 @@ export default function ProfilingBPRPage() {
       console.error('Gagal mengambil data BPR:', error);
     }
   };
-
 
   const handleDetailClick = (sandi) => {
     navigate(`/detail-bpr/${sandi}`);

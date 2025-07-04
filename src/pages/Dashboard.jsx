@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../helper/api';
 
 
 export default function Dashboard() {
@@ -14,20 +14,11 @@ export default function Dashboard() {
   const [totalProvinsi, setTotalProvinsi] = useState(null);
   const [fetchHistory, setFetchHistory] = useState([]);
 
-  const BASE_URL = 'https://eac9-210-210-144-170.ngrok-free.app';
 
 useEffect(() => {
   async function fetchRac() {
     try {
-      const token = localStorage.getItem('access_token');
-      const response = await axios.get(`${BASE_URL}/rac/getData`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          Accept: 'application/json',
-          'ngrok-skip-browser-warning': '6024'
-        },
-        withCredentials: false,
-      });
+      const response = await api.get('/rac/getData');
 
       setRacData(response.data); 
       console.log(response.data);
@@ -38,15 +29,7 @@ useEffect(() => {
   }
   async function fetchTopAsset() {
     try {
-      const token = localStorage.getItem('access_token');
-      const response = await axios.get(`${BASE_URL}/bpr_scrapping/top-asset`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          Accept: 'application/json',
-          'ngrok-skip-browser-warning': '6024'
-        },
-        withCredentials: false,
-      });
+      const response = await api.get('/bpr_scrapping/top-asset');
 
       if (response.data.status === 'success') {
         setTopAssetData(response.data.data);
@@ -57,16 +40,7 @@ useEffect(() => {
   }
   async function fetchTopNPL() {
     try {
-      const token = localStorage.getItem('access_token');
-      const response = await axios.get(`${BASE_URL}/bpr_scrapping/top-npl`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          Accept: 'application/json',
-          'ngrok-skip-browser-warning': '6024'
-        },
-        withCredentials: false,
-      });
-
+      const response = await api.get('/bpr_scrapping/top-npl');
       if (response.data.status === 'success') {
         setTopNPLData(response.data.data);
       }
@@ -76,16 +50,7 @@ useEffect(() => {
   }
   async function fetchTotalBPR() {
     try {
-      const token = localStorage.getItem('access_token');
-      const response = await axios.get(`${BASE_URL}/bpr_scrapping/count_total_bpr`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          Accept: 'application/json',
-          'ngrok-skip-browser-warning': '6024'
-        },
-        withCredentials: false,
-      });
-
+      const response = await api.get('/bpr_scrapping/count_total_bpr');
       if (response.data.status === 'success') {
         setBprTotalData(response.data);
       }
@@ -95,16 +60,7 @@ useEffect(() => {
   }
   async function fetchBPRSehat() {
     try {
-      const token = localStorage.getItem('access_token');
-      const response = await axios.get(`${BASE_URL}/bpr_scrapping/count_bpr_sehat`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          Accept: 'application/json',
-          'ngrok-skip-browser-warning': '6024'
-        },
-        withCredentials: false,
-      });
-
+      const response = await api.get('/bpr_scrapping/count_bpr_sehat');
       if (response.data.status === 'success') {
         setBprSehatData(response.data);
       }
@@ -114,16 +70,7 @@ useEffect(() => {
   }
   async function fetchBPRTidakSehat() {
     try {
-      const token = localStorage.getItem('access_token');
-      const response = await axios.get(`${BASE_URL}/bpr_scrapping/count_bpr_tidak_sehat`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          Accept: 'application/json',
-          'ngrok-skip-browser-warning': '6024'
-        },
-        withCredentials: false,
-      });
-
+      const response = await api.get('/bpr_scrapping/count_bpr_tidak_sehat');
       if (response.data.status === 'success') {
         setBprTidakSehatData(response.data);
       }
@@ -133,35 +80,17 @@ useEffect(() => {
   }
   async function fetchTotalProvinsi() {
     try {
-      const token = localStorage.getItem('access_token');
-      const response = await axios.get(`${BASE_URL}/bpr_lainnya/count_total_provinsi`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          Accept: 'application/json',
-          'ngrok-skip-browser-warning': '6024'
-        },
-        withCredentials: false,
-      });
-
+      const response = await api.get('/bpr_lainnya/count_total_provinsi');
       if (response.data.status === 'success') {
         setTotalProvinsi(response.data);
       }
     } catch (error) {
-      console.error('Gagal fetch BPR Tidak Sehat :', error);
+      console.error('Gagal fetch total provinsi:', error);
     }
   }
   async function fetchHistoryData() {
     try {
-      const token = localStorage.getItem('access_token');
-      const response = await axios.get(`${BASE_URL}/bpr_scrapping/fetch_history_all`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          Accept: 'application/json',
-          'ngrok-skip-browser-warning': '6024'
-        },
-        withCredentials: false,
-      });
-
+      const response = await api.get('/bpr_scrapping/fetch_history_all');
       setFetchHistory(response.data);
     } catch (error) {
       console.error('Gagal fetch riwayat:', error);

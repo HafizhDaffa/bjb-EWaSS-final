@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import axios from 'axios';
+import { authApi } from '../helper/api';
 
 const AuthContext = createContext(null);
 
@@ -24,15 +24,7 @@ export function AuthProvider({ children }) {
   const login = async (uid, password) => {
     setIsLoading(true);
     try {
-      const response = await axios.post(
-        'https://eac9-210-210-144-170.ngrok-free.app/user/login',
-        { uid, password },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+      const response = await authApi.post('/user/login', { uid, password });
 
       const { access_token, user } = response.data;
 

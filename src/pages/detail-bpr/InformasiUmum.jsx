@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import api from '../../helper/api'
 
 export default function InformasiUmumPage() {
   const [data, setData] = useState(null);
@@ -8,17 +8,9 @@ export default function InformasiUmumPage() {
   const params = useParams();
   
   useEffect(() => {
-    const token = localStorage.getItem('access_token');
     const fetchData = async () => {
       try {
-        const response = await axios.get(`https://eac9-210-210-144-170.ngrok-free.app/bpr_lainnya/get_detail/${params.id}`, {
-          headers: {
-          Authorization: `Bearer ${token}`,
-          Accept: 'application/json',
-          'ngrok-skip-browser-warning': '6024'
-        },
-        withCredentials: false,
-        });
+        const response = await api.get(`/bpr_lainnya/get_detail/${params.id}`);
         setData(response.data.data);
       } catch (error) {
         console.error('Gagal fetch data:', error);

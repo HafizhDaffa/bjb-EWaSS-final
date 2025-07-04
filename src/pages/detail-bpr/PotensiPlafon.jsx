@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { useParams } from "react-router-dom";
+import api from '../../helper/api'
 
 export default function PotensiPlafonPage() {
   const [data, setData] = useState(null);
@@ -10,18 +10,7 @@ export default function PotensiPlafonPage() {
   useEffect(() => {
     const fetchPlafon = async () => {
       try {
-        const token = localStorage.getItem("access_token");
-        const response = await axios.get(
-          `https://eac9-210-210-144-170.ngrok-free.app/bpr_lainnya/plafon/${params.id}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              Accept: "application/json",
-              "ngrok-skip-browser-warning": "6024",
-            },
-            withCredentials: false,
-          }
-        );
+        const response = await api.get(`/bpr_lainnya/plafon/${params.id}`);
         setData(response.data.data);
       } catch (error) {
         console.error("Error fetching plafon data:", error);
