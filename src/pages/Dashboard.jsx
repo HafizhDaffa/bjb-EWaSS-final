@@ -235,7 +235,7 @@ useEffect(() => {
       {/* Risk Acceptance Criteria BPR */}
       <section className="mb-10">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-2xl font-extrabold text-[#1E1E1E]">Risk Acceptance Criteria BPR</h2>
+          <h1 className="text-2xl font-bold text-[#173E72]">Risk Acceptance Criteria BPR</h1>
           <Link to="/ubah-rac" className="bg-[#1E3A70] text-white text-sm font-semibold rounded-md px-5 py-2 hover:bg-[#16325a] transition-colors">
             Ubah RAC
           </Link>
@@ -244,26 +244,26 @@ useEffect(() => {
           <table className="w-full text-xs text-[#1E1E1E]">
             <thead>
               <tr className="border-b border-[#D1D9E6]">
-                <th className="py-3 text-left font-semibold pr-4 w-20">NPL Nett {"<="}</th>
-                <th className="py-3 text-left font-semibold pr-4 w-20">Laba Tahun {">="}</th>
-                <th className="py-3 text-left font-semibold pr-4 w-28">Laba Bulan Berjalan {">="}</th>
-                <th className="py-3 text-left font-semibold pr-4 w-20">KAP {"<"}</th>
-                <th className="py-3 text-left font-semibold pr-4 w-24">KPMM/CAR {">="}</th>
                 <th className="py-3 text-left font-semibold pr-4 w-28">Aset</th>
+                <th className="py-3 text-left font-semibold pr-4 w-20">Laba Tahun Sebelumnya {">="}</th>
+                <th className="py-3 text-left font-semibold pr-4 w-28">Laba Saat Ini {">="}</th>
+                <th className="py-3 text-left font-semibold pr-4 w-20">NPL Nett {"<="}</th>
+                <th className="py-3 text-left font-semibold pr-4 w-24">KPMM/CAR {">="}</th>
                 <th className="py-3 text-left font-semibold pr-4 w-20">ROA {">="}</th>
+                <th className="py-3 text-left font-semibold pr-4 w-20">KAP {"<"}</th>
                 <th className="py-3 text-left font-semibold pr-4 w-20">BOPO {"<"}</th>
               </tr>
             </thead>
             <tbody>
               {racData ? (
                 <tr>
-                  <td className="py-3 pr-4 font-normal">{racData.npl_net?.toFixed(2)}%</td>
-                  <td className="py-3 pr-4 font-normal">{racData.laba_sekarang}</td>
-                  <td className="py-3 pr-4 font-normal">{racData.laba_sebelum}</td>
-                  <td className="py-3 pr-4 font-normal">{racData.kap?.toFixed(2)}%</td>
-                  <td className="py-3 pr-4 font-normal">{racData.kpmm?.toFixed(2)}%</td>
                   <td className="py-3 pr-4 font-normal">{Number(racData.asset).toLocaleString('id-ID')}</td>
+                  <td className="py-3 pr-4 font-normal">{Number(racData.laba_sebelum).toLocaleString('id-ID')}</td>
+                  <td className="py-3 pr-4 font-normal">{Number(racData.laba_sekarang).toLocaleString('id-ID')}</td>
+                  <td className="py-3 pr-4 font-normal">{racData.npl_net?.toFixed(2)}%</td>
+                  <td className="py-3 pr-4 font-normal">{racData.kpmm?.toFixed(2)}%</td>
                   <td className="py-3 pr-4 font-normal">{racData.roa?.toFixed(2)}%</td>
+                  <td className="py-3 pr-4 font-normal">{racData.kap?.toFixed(2)}%</td>
                   <td className="py-3 pr-4 font-normal">{racData.bopo?.toFixed(2)}%</td>
                 </tr>
               ) : (
@@ -279,21 +279,21 @@ useEffect(() => {
       {/* Fetch Data BPR */}
       <section className="mb-10 w-full">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-2xl font-extrabold text-[#1E1E1E]">Fetch Data BPR</h2>
+          <h1 className="text-2xl font-bold text-[#173E72]">Fetch Data BPR</h1>
           <button className="bg-[#1E3A70] text-white text-sm font-semibold rounded-md px-5 py-2">
             Fetch Data
           </button>
         </div>
         <div className="bg-white rounded-lg p-6 border border-[#D1D9E6] overflow-auto w-full">
-          <table className="min-w-[1024px] w-full text-xs text-[#1E1E1E] table-auto">
+          <table className="table-fixed w-full text-xs text-[#1E1E1E]">
             <thead>
               <tr className="border-b border-[#D1D9E6]">
-                <th className="py-3 text-left font-semibold pr-4 w-8">No</th>
-                <th className="py-3 text-left font-semibold pr-4 w-28">Start</th>
-                <th className="py-3 text-left font-semibold pr-4 w-24">End</th>
-                <th className="py-3 text-left font-semibold pr-4 w-36">Periode Laporan</th>
-                <th className="py-3 text-left font-semibold pr-4 w-24">Status</th>
-                <th className="py-3 text-left font-semibold pr-4">User</th>
+                <th className="w-[5%] py-3 text-left font-semibold">No</th>
+                <th className="w-[20%] py-3 text-left font-semibold">Start</th>
+                <th className="w-[25%] py-3 text-left font-semibold">End</th>
+                <th className="w-[25%] py-3 text-left font-semibold">Periode Laporan</th>
+                <th className="w-[15%] py-3 text-left font-semibold">Status</th>
+                <th className="w-[10%] py-3 text-left font-semibold">User</th>
               </tr>
             </thead>
             <tbody>

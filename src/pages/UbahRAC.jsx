@@ -110,7 +110,7 @@ export default function UbahRACPage() {
   return (
     <section className="flex-1 p-4 flex items-start justify-start bg-gray-50 pt-2 pl-8">
       <div className="w-full max-w-2xl">
-        <h1 className="text-xl font-bold text-gray-900 mb-4">Ubah Data RAC</h1>
+        <h1 className="text-2xl font-bold text-[#173E72] mb-4">Ubah Data RAC</h1>
         <form
           autoComplete="off"
           className="bg-white rounded-lg p-6 shadow-sm border border-gray-200 space-y-4"
@@ -118,8 +118,8 @@ export default function UbahRACPage() {
           onSubmit={handleSubmit}
         >
           {renderInput('npl', 'NPL Nett', true)}
-          {renderInput('labaTahun', 'Laba Tahun')}
-          {renderInput('labaBulan', 'Laba Bulan Berjalan')}
+          {renderInput('labaTahun', 'Laba Tahun Sebelumnya')}
+          {renderInput('labaBulan', 'Laba Saat Ini')}
           {renderInput('kap', 'KAP', true)}
           {renderInput('kpmmCar', 'KPMM/CAR', true)}
           {renderInput('aset', 'Aset')}

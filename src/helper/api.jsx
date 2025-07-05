@@ -1,7 +1,7 @@
 // src/utils/api.js
 import axios from 'axios';
 
-const BASE_URL = 'https://eac9-210-210-144-170.ngrok-free.app'; // Ubah di sini saja jika perlu
+const BASE_URL = 'https://a35e-210-210-144-170.ngrok-free.app'; // Ubah di sini saja jika perlu
 
 const api = axios.create({
   baseURL: BASE_URL,
